@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEN'S DATA</title>
+    <style>
+        #container{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 20px;
+        }
+        .box{
+            padding: 20px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+        button{
+            background-color: skyblue;
+            color: white;
+            padding: 10px;
+            border: 1px;
+            border-radius: 5px;
+            font-size: large;
+            width: fit-content;
+        }
+    </style>
+</head>
+<body>
+    <h1>Men's Data</h1>
+    <div id="container">
+
+    </div>
+</body>
+    <script>
+        var mensData = [
+            {
+                img_url:"https://content.shop4reebok.com/static/Product-EX4296/reebok_EX4296_1.jpg.plp",
+                name: "MEN'S REEBOK RUNNING ROADMAP SHOES",
+                price: 1170,
+            },
+            {
+                img_url:"https://content.shop4reebok.com/static/Product-EX3921/reebok_EX3921_1.jpg.plp",
+                name: "MEN'S REEBOK SWIM ARUBA FLIP SLIPPERS",
+                price: 699,
+            },
+            {
+                img_url:"https://content.shop4reebok.com/static/Product-EX4160/reebok_EX4160_1.jpg.plp",
+                name: "MEN'S REEBOK RUNNING AUSTIN SHOES",
+                price: 945,
+            },
+            {
+                img_url:"https://content.shop4reebok.com/static/Product-FV8798/MEN_SWIM_SLIPPERS_FV8798_1.jpg.plp",
+                name: "MEN'S REEBOK SWIM AVENGER FLIP LP SLIPPERS",
+                price: 399,
+            },
+        ]
+            var cartdata;
+            if(localStorage.getItem("cartdata") == null){
+                cartdata = [];
+            }else{
+                cartdata = JSON.parse(localStorage.getItem("cartdata"));
+            }
+            mensData.forEach(function(mensData){
+                var box = document.createElement("div");
+                box.setAttribute("class","box");
+
+                var img = document.createElement("img");
+                img.src = mensData.img_url;
+
+                var name = document.createElement("p");
+                name.innerText = mensData.name;
+
+                var price = document.createElement("p");
+                price.innerText = mensData.price;
+
+                var cartButton = document.createElement("button");
+                cartButton.innerText = "Add to Cart";
+
+                cartButton.addEventListener("click",function(){
+                    cartdata.push(mensData);
+                    console.log(cartdata);
+                    alert("Items added Successfully to Cart");
+                    localStorage.setItem("cartdata",JSON.stringify("cartdata"));
+                });
+                box.append(img, name, price, cartButton);
+                document.querySelector("#container").append(box);
+            });
+            
+    </script>
+
+</html>
